@@ -11,7 +11,7 @@ export default function Page() {
   const id = Number(idStr);
   const router = useRouter();
 
-  const [post, setPosts] = useState<PostWithContentDto | null>(null);
+  const [post, setPost] = useState<PostWithContentDto | null>(null);
   const [postComments, setPostComments] = useState<PostCommentDto[] | null>(
     null
   );
@@ -22,6 +22,15 @@ export default function Page() {
     }).then((data) => {
       alert(data.msg);
       router.replace("/posts");
+    });
+  };
+
+
+  const deleteComment = (id: number, commentId:number) => {
+    apiFetch(`/api/v1/posts/${id}/comments/${commentId}`, {
+      method: "DELETE",
+    }).then((data) => {
+      alert(data.msg);
     });
   };
 
@@ -67,7 +76,18 @@ export default function Page() {
       {postComments != null && postComments.length > 0 && (
         <ul>
           {postComments.map((comment) => (
-            <li key={comment.id}>{comment.content}</li>
+            <li key={comment.id}>
+              {comment.content}
+              <button
+                className="p-2 rounded border"
+                onClick={() =>
+                  confirm(`${comment.id}번 댓글을 정말로 삭제하시겠습니까?`) &&
+                  deleteComment(id, comment.id)
+                }
+              >
+                삭제
+              </button>
+            </li>
           ))}
         </ul>
       )}
