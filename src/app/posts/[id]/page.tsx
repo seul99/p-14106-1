@@ -1,10 +1,9 @@
 "use client";
 
+import { apiFetch } from "@/lib/backend/client";
 import type { PostWithContentDto } from "@/type/post";
 import { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
-
-const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export default function Page() {
   const { id } = useParams<{ id: string }>();
@@ -18,9 +17,7 @@ export default function Page() {
   const [post, setPosts] = useState<PostWithContentDto | null>(null);
 
   useEffect(() => {
-    fetch(`${NEXT_PUBLIC_API_BASE_URL}/api/v1/posts/${id}`)
-      .then((res) => res.json())
-      .then(setPosts);
+    apiFetch(`/api/v1/posts/${id}`).then(setPosts);
   }, []);
 
   if (post == null) return <div>로딩중...</div>;

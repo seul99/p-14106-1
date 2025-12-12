@@ -3,7 +3,7 @@
 import type { PostDto } from "@/type/post";
 import { useEffect, useState } from "react";
 import Link from "next/link";
-const NEXT_PUBLIC_API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+import { apiFetch } from "@/lib/backend/client";
 
 export default function Page() {
   // const posts = [
@@ -26,9 +26,7 @@ export default function Page() {
     //   { id: 2, title: "명언 2" },
     //   { id: 3, title: "명언 3" },
     // ]);
-    fetch(`${NEXT_PUBLIC_API_BASE_URL}/api/v1/posts`)
-      .then((res) => res.json())
-      .then(setPosts);
+    apiFetch(`/api/v1/posts`).then(setPosts);
   }, []);
 
   return (
