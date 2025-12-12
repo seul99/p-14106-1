@@ -1,4 +1,5 @@
 "use client";
+import { apiFetch } from "@/lib/backend/client";
 
 export default function Page() {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -26,6 +27,16 @@ export default function Page() {
       contentTextarea.focus();
       return;
     }
+
+    apiFetch(`/api/v1/posts`, {
+      method: "POST",
+      body: JSON.stringify({
+        title: titleInput.value,
+        content: contentTextarea.value,
+      }),
+    }).then((data) => {
+      alert(data.msg);
+    });
   };
 
   return (
