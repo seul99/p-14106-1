@@ -39,6 +39,7 @@ export default function Page() {
       }),
     }).then((data) => {
       alert(data.msg);
+      router.replace(`/posts/${data.data.id}`);
     });
   };
 
