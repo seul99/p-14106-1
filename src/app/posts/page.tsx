@@ -1,4 +1,6 @@
 "use client";
+
+import type { PostDto } from "@/type/post";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 
@@ -15,7 +17,7 @@ export default function Page() {
   //   { id: 9, title: "명언 9" },
   //   { id: 10, title: "명언 10" },
   // ];
-  const [posts, setPosts] = useState<{ id: number; title: string }[]>([]);
+  const [posts, setPosts] = useState<PostDto[]>([]);
 
   useEffect(() => {
     // setPosts([
