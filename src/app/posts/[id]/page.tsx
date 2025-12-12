@@ -25,12 +25,15 @@ export default function Page() {
     });
   };
 
-
-  const deleteComment = (id: number, commentId:number) => {
+  const deleteComment = (id: number, commentId: number) => {
     apiFetch(`/api/v1/posts/${id}/comments/${commentId}`, {
       method: "DELETE",
     }).then((data) => {
       alert(data.msg);
+
+      if (postComments == null) return;
+
+      setPostComments(postComments.filter((c) => c.id != commentId));
     });
   };
 
