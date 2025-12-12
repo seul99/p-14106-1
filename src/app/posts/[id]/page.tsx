@@ -1,8 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
 
 export default function Page() {
+  const { id } = useParams<{ id: string }>();
+
   const [post, setPosts] = useState<{
     id: number;
     title: string;
@@ -10,7 +13,7 @@ export default function Page() {
   } | null>(null);
 
   useEffect(() => {
-    fetch("http://localhost:8080/api/v1/posts/1")
+    fetch(`http://localhost:8080/api/v1/posts/${id}`)
       .then((res) => res.json())
       .then(setPosts);
   }, []);
