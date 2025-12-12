@@ -23,6 +23,12 @@ export default function Page() {
       return;
     }
 
+    if (titleInput.value.length < 2) {
+      alert("제목은 2글자 이상 입력해주세요.");
+      titleInput.focus();
+      return;
+    }
+
     contentTextarea.value = contentTextarea.value.trim();
 
     if (contentTextarea.value.length === 0) {
@@ -31,6 +37,11 @@ export default function Page() {
       return;
     }
 
+    if (contentTextarea.value.length < 2) {
+      alert("내용은 2글자 이상 입력해주세요.");
+      contentTextarea.focus();
+      return;
+    }
     apiFetch(`/api/v1/posts`, {
       method: "POST",
       body: JSON.stringify({
@@ -53,11 +64,13 @@ export default function Page() {
           type="text"
           name="title"
           placeholder="제목"
+          maxLength={100}
         />
         <textarea
           className="border p-2 rounded"
           name="content"
           placeholder="내용"
+          maxLength={5000}
         />
         <button className="border p-2 rounded" type="submit">
           저장

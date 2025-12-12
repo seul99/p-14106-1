@@ -4,8 +4,8 @@ export const apiFetch = (url: string, options?: RequestInit) => {
   if (options?.body) {
     const headers = new Headers(options?.headers || {});
 
-    if(!headers.has("Content-Type")){
-      headers.set("Content-Type", "application/json; charset=utf-8")''
+    if (!headers.has("Content-Type")) {
+      headers.set("Content-Type", "application/json; charset=utf-8");
     }
 
     options.headers = headers;
